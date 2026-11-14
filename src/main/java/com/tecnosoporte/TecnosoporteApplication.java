@@ -1,0 +1,13 @@
+package com.tecnosoporte;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TecnosoporteApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(TecnosoporteApplication.class, args);
+	}
+
+}

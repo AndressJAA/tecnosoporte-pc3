@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detalle de la cotización de servicios técnicos.">
+    <title>Cotización calculada | TecnoSoporte</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css">
+</head>
+<body class="result-page">
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="brand" th:href="@{/}" aria-label="Ir al inicio de TecnoSoporte">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                    <path d="M12 2.5 20 7v10l-8 4.5L4 17V7l8-4.5Z"></path>
+                    <path d="m8.5 12 2.1 2.1 4.9-5"></path>
+                </svg>
+            </span>
+            <span class="brand-copy">
+                <strong>TecnoSoporte</strong>
+                <small>Soluciones que funcionan</small>
+            </span>
+        </a>
+        <span class="header-badge">
+            <span class="status-dot"></span>
+            Cotización lista
+        </span>
+    </div>
+</header>
+
+<main class="result-shell">
+    <div class="container result-container">
+        <section class="success-heading" aria-labelledby="result-title">
+            <span class="success-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"></path></svg>
+            </span>
+            <span class="eyebrow">Cálculo completado</span>
+            <h1 id="result-title">Tu cotización está lista</h1>
+            <p>Preparamos el detalle para <strong th:text="${cotizacion.nombreCliente}">Andrea Ramírez</strong>.</p>
+        </section>
+
+        <article class="result-card">
+            <div class="result-card-header">
+                <div>
+                    <span class="document-label">Resumen de servicio</span>
+                    <h2 th:text="${cotizacion.servicio.nombre}">Diagnóstico de computadora</h2>
+                    <p th:text="${cotizacion.servicio.descripcion}">Evaluación integral de hardware y software</p>
+                </div>
+                <span class="service-code" th:text="${cotizacion.servicio.name()}">DIAGNOSTICO</span>
+            </div>
+
+            <div class="customer-strip">
+                <div>
+                    <span>Cliente</span>
+                    <strong th:text="${cotizacion.nombreCliente}">Andrea Ramírez</strong>
+                </div>
+                <div>
+                    <span>Tipo</span>
+                    <strong th:text="${cotizacion.tipoCliente.nombre}">Nuevo</strong>
+                </div>
+                <div>
+                    <span>Cantidad</span>
+                    <strong th:text="${cotizacion.cantidad + (cotizacion.cantidad == 1 ? ' unidad' : ' unidades')}">2 unidades</strong>
+                </div>
+            </div>
+
+            <div class="price-breakdown" aria-label="Detalle de importes">
+                <div class="price-row">
+                    <span>Precio unitario</span>
+                    <strong th:text="${'S/ ' + cotizacion.precioUnitario}">S/ 40.00</strong>
+                </div>
+                <div class="price-row">
+                    <span th:text="${'Subtotal (' + cotizacion.cantidad + ' × S/ ' + cotizacion.precioUnitario + ')'}">Subtotal</span>
+                    <strong th:text="${'S/ ' + cotizacion.subtotal}">S/ 80.00</strong>
+                </div>
+                <div class="price-row discount-row">
+                    <span>
+                        Descuento
+                        <b th:text="${cotizacion.porcentajeDescuento + '%'}">10%</b>
+                    </span>
+                    <strong th:text="${'- S/ ' + cotizacion.importeDescuento}">- S/ 14.00</strong>
+                </div>
+            </div>
+
+            <div class="total-panel">
+                <span>
+                    <small>Total final</small>
+                    <b>Importe a pagar</b>
+                </span>
+                <strong th:text="${'S/ ' + cotizacion.total}">S/ 126.00</strong>
+            </div>
+
+            <div class="result-footer">
+                <span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"></path><path d="M12 16v-4M12 8h.01"></path></svg>
+                    Importe expresado en soles peruanos
+                </span>
+                <a class="secondary-button" th:href="@{/cotizaciones/nueva}">
+                    Nueva cotización
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+                </a>
+            </div>
+        </article>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>© 2026 TecnoSoporte</span>
+        <span>Atención técnica confiable</span>
+    </div>
+</footer>
+</body>
+</html>
